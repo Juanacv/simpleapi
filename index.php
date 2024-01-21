@@ -3,7 +3,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" &&
     $attributes = ["name"=>$_POST['name'],'token'=>$_POST['token']];
     $verb = $_POST['verb'];
 
-    $url = 'http://127.0.0.1/simple-api/api/sayhello';
+    $url = 'http://127.0.0.1/simple-api/api/'.$_POST['method'];
     $ch = curl_init($url);
 
     // Configurar opciones para la solicitud PUT
@@ -40,6 +40,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" &&
                 <option value="PUT">PUT</option>
                 <option value="DELETE">DELETE</option>
             </select>
+            <select name="method" id="method">
+                <option value="welcome">welcome</option>
+                <option value="sayhello">sayhello</option>
+            </select>            
             <input type="text" name="name" id="name">
             <input type="hidden" name="token" value="fa3b2c9c-a96d-48a8-82ad-0cb775dd3e5d">
             <button type="submit">Enviar</button>
