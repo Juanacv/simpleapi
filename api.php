@@ -97,6 +97,7 @@ $endpoints["checktoken"] = function ($requestData): void {
 header("Content-Type: application/json; charset=UTF-8");
 
 if (isset($endpoints[$endpointName])) {
+    $endpoints["checktoken"]($requestData);
     $endpoints[$endpointName]($requestData);
 } else {
     $endpoints["404"](array("endpointName" => $endpointName));

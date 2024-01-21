@@ -1,6 +1,7 @@
 <?php
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['token'])) {
-    $attributes = ["name"=>$_POST['name'],'token'=>$_POST['token']];
+    $attributes['token']=$_POST['token'];
+    if (isset($_POST['name'])) $attributes['name']=$_POST['name'];
     $verb = $_POST['verb'];
 
     $url = 'http://127.0.0.1/simple-api/api/'.$_POST['method'];
