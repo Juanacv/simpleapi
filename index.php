@@ -1,5 +1,5 @@
 <?php
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['name'])) {
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['token'])) {
     $attributes = ["name"=>$_POST['name'],'token'=>$_POST['token']];
     $verb = $_POST['verb'];
 
