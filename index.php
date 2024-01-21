@@ -1,32 +1,3 @@
-<?php
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['token'])) {
-    $attributes['token']=$_POST['token'];
-    if (isset($_POST['name'])) $attributes['name']=$_POST['name'];
-    $verb = $_POST['verb'];
-
-    $url = 'http://127.0.0.1/simple-api/api/'.$_POST['method'];
-    $ch = curl_init($url);
-
-    // Configurar opciones para la solicitud PUT
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $verb);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($attributes)); // Aquí puedes ajustar la forma en que envías los datos según tus necesidades
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    // Ejecutar la solicitud
-    $response = curl_exec($ch);
-
-    // Verificar errores
-    if (curl_errno($ch)) {
-        echo 'Error en la solicitud cURL: ' . curl_error($ch);
-    }
-
-    // Cerrar la sesión cURL
-    curl_close($ch);
-    
-    // Manejar la respuesta (puedes hacer lo que necesites con $response)
-    echo $response;
-}
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,5 +20,34 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" &&
             <input type="hidden" name="token" value="fa3b2c9c-a96d-48a8-82ad-0cb775dd3e5d">
             <button type="submit">Enviar</button>
         </form>
+        <?php
+        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['token'])) {
+            $attributes['token']=$_POST['token'];
+            if (isset($_POST['name'])) $attributes['name']=$_POST['name'];
+            $verb = $_POST['verb'];
+
+            $url = 'http://127.0.0.1/simple-api/api/'.$_POST['method'];
+            $ch = curl_init($url);
+
+            // Configurar opciones para la solicitud PUT
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $verb);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($attributes)); // Aquí puedes ajustar la forma en que envías los datos según tus necesidades
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            // Ejecutar la solicitud
+            $response = curl_exec($ch);
+
+            // Verificar errores
+            if (curl_errno($ch)) {
+                echo 'Error en la solicitud cURL: ' . curl_error($ch);
+            }
+
+            // Cerrar la sesión cURL
+            curl_close($ch);
+            
+            // Manejar la respuesta (puedes hacer lo que necesites con $response)
+            echo json_decode($response);
+        }
+        ?>        
     </body>
 </html>
