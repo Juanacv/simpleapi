@@ -22,7 +22,7 @@
         </form>
         <?php
         if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['token'])) {
-            $attributes['token']=$_POST['token'];
+            $token=$_POST['token'];
             if (isset($_POST['name'])) $attributes['name']=$_POST['name'];
             $verb = $_POST['verb'];
 
@@ -32,6 +32,8 @@
             // Configurar opciones para la solicitud PUT
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $verb);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($attributes)); // Aquí puedes ajustar la forma en que envías los datos según tus necesidades
+            curl_setopt($ch, CURLOPT_HTTPHEADER, ["X-API-Key: $token"]);
+            
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
             // Ejecutar la solicitud
